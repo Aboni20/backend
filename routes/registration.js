@@ -4,10 +4,9 @@ const registrationService = require("../services/registrationService");
 const { validateRegistrationStatus } = require("../validation/schemas");
 
 // Get registration status by ID
-router.get("/status/:registrationId", async (req, res, next) => {
+router.post("/status", async (req, res, next) => {
   try {
-    const { registrationId } = req.params;
-
+    const { registrationId } = req.body;
     // Validate registration ID format
     const { error } = validateRegistrationStatus({ registrationId });
     if (error) {

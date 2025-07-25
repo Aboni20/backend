@@ -51,8 +51,7 @@ The server will run on `http://localhost:4000` by default.
 
 ### Registration
 
-- **GET** `registration/status/:registrationId` - Get registration status by ID
-- **GET** `registration/all` - Get all registrations (admin)
+- **POST** `registration/status` - Get registration status by ID
 - **POST** `registration` - Create new registration
 
 ## Features
@@ -117,7 +116,45 @@ curl http://localhost:4000/registration/status/ITMS2025-1234
 
 ## Production Deployment
 
+### Vercel Deployment
+
+1. Install Vercel CLI globally:
+
+```bash
+npm install -g vercel
+```
+
+2. Login to Vercel:
+
+```bash
+vercel login
+```
+
+3. Deploy to Vercel:
+
+```bash
+vercel --prod
+```
+
+4. Set environment variables in Vercel dashboard:
+
+   - `SUPABASE_URL`: Your Supabase project URL
+   - `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase service role key
+   - `NODE_ENV`: `production`
+
+5. Your API will be available at: `https://your-project-name.vercel.app`
+
+### Other Deployment Options
+
 1. Set `NODE_ENV=production` in your environment
 2. Use `npm start` to run the server
 3. Consider using a process manager like PM2 for production deployments
 4. Set up proper logging and monitoring
+
+## Frontend Integration
+
+After deploying to Vercel, update your frontend's `VITE_API_BASE_URL` environment variable to point to your Vercel deployment URL:
+
+```bash
+VITE_API_BASE_URL=https://your-project-name.vercel.app
+```
